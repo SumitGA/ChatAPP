@@ -6,20 +6,22 @@ const router = require('./router')
 
 const bodyParser = require('body-parser')
 
-require('dotenv').config();
+require('dotenv').config()
+
+const cors = require('cors')
 
 const app = express()
 
 // To send form data
-app.use(bodyParser.urlencoded({extended: true}))
+app.use(bodyParser.urlencoded({ extended: true }))
 
 // To parse json object
 app.use(bodyParser.json())
-
-app.use(router);
+app.use(cors())
+app.use(router)
 
 const port = config.appPORT
 
 app.listen(port, () => {
-  console.log(`Server listening on port ${port}`);
+  console.log(`Server listening on port ${port}`)
 })
