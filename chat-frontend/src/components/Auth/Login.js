@@ -2,13 +2,20 @@ import React, { useState } from 'react'
 import loginImage from '../../assets/images/login.svg'
 import './Auth.scss'
 import { Link } from 'react-router-dom'
+import axios from 'axios'
+import AuthService from '../../services/authService'
 
 const Login = () => {
-  const [email, setEmail] = useState('john.doe@gmail.com')
+  const [email, setEmail] = useState('john.doe@email.com')
   const [password, setPassword] = useState('secret')
   const submitForm = (e) => {
     e.preventDefault()
-    console.log(email, password)
+
+    AuthService.login({ email, password })
+      .then((res) => {
+        console.log(res)
+      })
+      .catch()
   }
 
   return (
