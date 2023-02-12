@@ -1,9 +1,16 @@
-import React from 'react'
+import React, { useState } from 'react'
 import loginImage from '../../assets/images/login.svg'
 import './Auth.scss'
 import { Link } from 'react-router-dom'
 
 const Login = () => {
+  const [email, setEmail] = useState('john.doe@gmail.com')
+  const [password, setPassword] = useState('secret')
+  const submitForm = (e) => {
+    e.preventDefault()
+    console.log(email, password)
+  }
+
   return (
     <div id="auth-container">
       <div id="auth-card">
@@ -13,12 +20,24 @@ const Login = () => {
           </div>
           <div id="form-section">
             <h2>Welcome Back</h2>
-            <form>
+            <form onSubmit={submitForm}>
               <div className="input-field mb-1">
-                <input placeholder="Email" />
+                <input
+                  onChange={(e) => setEmail(e.target.value)}
+                  value={email}
+                  required="required"
+                  type="text"
+                  placeholder="Email"
+                />
               </div>
               <div className="input-field mb-2">
-                <input placeholder="Password" />
+                <input
+                  onChange={(e) => setPassword(e.target.value)}
+                  value={password}
+                  required="required"
+                  type="password"
+                  placeholder="Password"
+                />
               </div>
               <button>LOGIN</button>
             </form>
