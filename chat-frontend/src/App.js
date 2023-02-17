@@ -40,7 +40,6 @@ function App() {
     <Router>
       <div className="App">
         <Routes>
-          <Route exact path="/" element={<Chat />} />
           <Route
             exact
             path="/"

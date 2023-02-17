@@ -19,6 +19,7 @@
     "react-router-dom": "^6.8.1",
     "react-scripts": "5.0.1",
     "redux": "^4.2.1",
+    "redux-logger": "^3.0.6",
     "redux-thunk": "^2.4.2",
     "web-vitals": "^2.1.4"
   },
@@ -45,5 +46,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "redux-devtools-extension": "^2.13.9"
   }
 }

@@ -1,10 +1,13 @@
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
+import { logout } from '../../../../store/actions/auth'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import './NavBar.scss'
 
 const NavBar = () => {
   const user = useSelector((state) => state.authReducer.user)
+  const dispatch = useDispatch()
   const [showProfileOptions, setShowProfileOptions] = useState(false)
 
   return (
@@ -22,7 +25,7 @@ const NavBar = () => {
         {showProfileOptions && (
           <div id="profile-options">
             <p>Update Profile</p>
-            <p>Logout</p>
+            <p onClick={() => dispatch(logout())}>Logout</p>
           </div>
         )}
       </div>
