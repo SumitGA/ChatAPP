@@ -12,9 +12,7 @@ const Login = () => {
     e.preventDefault()
 
     AuthService.login({ email, password })
-      .then((res) => {
-        console.log(res)
-      })
+      .then((res) => {})
       .catch()
   }
 
