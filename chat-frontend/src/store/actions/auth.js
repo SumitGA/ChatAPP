@@ -1,5 +1,6 @@
-export const LOGIN = 'LOGIN'
 import AuthService from '../../services/authService'
+
+export const LOGIN = 'LOGIN'
 
 export const login = (params) => (dispatch) => {
   return AuthService.login(params)
