@@ -1,14 +1,16 @@
-import React, { useState } from 'react'
+import React, { useState, Fragment } from 'react'
 import { useSelector } from 'react-redux'
 import { useDispatch } from 'react-redux'
 import { logout } from '../../../../store/actions/auth'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import Modal from '../../../Modal/Modal'
 import './NavBar.scss'
 
 const NavBar = () => {
   const user = useSelector((state) => state.authReducer.user)
   const dispatch = useDispatch()
   const [showProfileOptions, setShowProfileOptions] = useState(false)
+  const [showProfileModal, setShowProfileModal] = useState(true)
 
   return (
     <div id="navbar" className="card-shadow">
@@ -24,9 +26,69 @@ const NavBar = () => {
         <FontAwesomeIcon icon="caret-down" className="fa-icon" />
         {showProfileOptions && (
           <div id="profile-options">
-            <p>Update Profile</p>
+            <p onClick={() => setShowProfileModal(true)}>Update Profile</p>
             <p onClick={() => dispatch(logout())}>Logout</p>
           </div>
+        )}
+        {showProfileModal && (
+          <Modal click={() => setShowProfileModal(false)}>
+            <Fragment key="header">
+              <h3 className="m-0">Update Profile</h3>
+            </Fragment>
+            <Fragment key="body">
+              {/* <form onSubmit={submitForm}>
+                <div className="input-field mb-1">
+                  <input
+                    onChange={(e) => setFirstName(e.target.value)}
+                    value={firstName}
+                    required="required"
+                    type="text"
+                    placeholder="First Name"
+                  />
+                </div>
+                <div className="input-field mb-1">
+                  <input
+                    onChange={(e) => setLastName(e.target.value)}
+                    value={lastName}
+                    required="required"
+                    type="text"
+                    placeholder="Last Name"
+                  />
+                </div>
+                <div className="input-field mb-1">
+                  <input
+                    onChange={(e) => setEmail(e.target.value)}
+                    value={email}
+                    required="required"
+                    type="text"
+                    placeholder="Email"
+                  />
+                </div>
+
+                <div className="input-field mb-1">
+                  <select
+                    onChange={(e) => setGender(e.target.value)}
+                    value={gender}
+                    required="required"
+                  >
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                  </select>
+                </div>
+                <div className="input-field mb-2">
+                  <input
+                    onChange={(e) => setPassword(e.target.value)}
+                    value={password}
+                    required="required"
+                    type="password"
+                    placeholder="Password"
+                  />
+                </div>
+                <button>Register</button>
+              </form> */}
+            </Fragment>
+            <Fragment key="footer">Modal Footer</Fragment>
+          </Modal>
         )}
       </div>
     </div>
