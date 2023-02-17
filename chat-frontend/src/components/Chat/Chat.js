@@ -5,6 +5,7 @@ import './Chat.scss'
 
 const Chat = () => {
   const user = useSelector((state) => state.authReducer.user)
+  console.log(user)
   return (
     <div id="chat-container">
       <NavBar />
