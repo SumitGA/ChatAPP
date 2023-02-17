@@ -12,6 +12,26 @@ const NavBar = () => {
   const [showProfileOptions, setShowProfileOptions] = useState(false)
   const [showProfileModal, setShowProfileModal] = useState(true)
 
+  const [firstName, setFirstName] = useState(user.firstName)
+  const [lastName, setLastName] = useState(user.lastName)
+  const [email, setEmail] = useState(user.email)
+  const [gender, setGender] = useState(user.gender)
+  const [password, setPassword] = useState('')
+  const [avatar, setAvatar] = useState('')
+
+  const submitForm = (e) => {
+    e.preventDefault()
+
+    const form = { firstName, lastName, email, gender, password, avatar }
+
+    const formData = new FormData()
+    for (const key in form) {
+      formData.append(key, form[key])
+    }
+
+    // dispatch
+  }
+
   return (
     <div id="navbar" className="card-shadow">
       <h2>Chat.io</h2>
@@ -36,7 +56,7 @@ const NavBar = () => {
               <h3 className="m-0">Update Profile</h3>
             </Fragment>
             <Fragment key="body">
-              {/* <form onSubmit={submitForm}>
+              <form onSubmit={submitForm}>
                 <div className="input-field mb-1">
                   <input
                     onChange={(e) => setFirstName(e.target.value)}
@@ -84,10 +104,17 @@ const NavBar = () => {
                     placeholder="Password"
                   />
                 </div>
-                <button>Register</button>
-              </form> */}
+                <div className="input-field mb-2">
+                  <input
+                    onChange={(e) => setAvatar(e.target.files[0])}
+                    type="file"
+                  />
+                </div>
+              </form>
             </Fragment>
-            <Fragment key="footer">Modal Footer</Fragment>
+            <Fragment key="footer">
+              <button className="btn-success">UPDATE</button>
+            </Fragment>
           </Modal>
         )}
       </div>
