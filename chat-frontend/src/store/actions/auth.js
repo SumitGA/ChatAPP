@@ -1,6 +1,7 @@
 import AuthService from '../../services/authService'
 
 export const LOGIN = 'LOGIN'
+export const REGISTER = 'REGISTER'
 
 export const login = (params, history) => (dispatch) => {
   return AuthService.login(params)
@@ -9,5 +10,19 @@ export const login = (params, history) => (dispatch) => {
       dispatch({ type: LOGIN, payload: data })
       history('/')
     })
-    .catch((err) => {})
+    .catch((err) => {
+      throw err
+    })
+}
+
+export const register = (params, history) => (dispatch) => {
+  return AuthService.register(params)
+    .then((data) => {
+      console.log(data)
+      dispatch({ type: REGISTER, payload: data })
+      history('/')
+    })
+    .catch((err) => {
+      throw err
+    })
 }
