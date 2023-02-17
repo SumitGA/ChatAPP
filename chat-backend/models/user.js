@@ -27,7 +27,7 @@ module.exports = (sequelize, DataTypes) => {
           const avatar = this.getDataValue('avatar')
           const url = `${config.appURL}:${config.appPORT}`
           if (!avatar) {
-            return `${url}/${this.getDataValue('gender')}.png`
+            return `${url}/${this.getDataValue('gender')}.svg`
           }
         },
       },
