@@ -1,7 +1,15 @@
 const User = require('../models').User
 const sequelize = require('sequelize')
+const { userFile } = require('../middleware/fileUpload')
 
 exports.update = async (req, res) => {
+  if (req.file) {
+    req.body.avatar = req.file.filename
+  }
+
+  if (typeof req.body.avatar !== 'undefined' && req.body.avatar.length === 0)
+    delete req.body.avatar
+
   try {
     const [rows, result] = await User.update(req.body, {
       where: {
