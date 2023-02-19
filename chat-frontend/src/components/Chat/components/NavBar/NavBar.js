@@ -1,7 +1,7 @@
 import React, { useState, Fragment } from 'react'
 import { useSelector } from 'react-redux'
 import { useDispatch } from 'react-redux'
-import { logout } from '../../../../store/actions/auth'
+import { logout, updateProfile } from '../../../../store/actions/auth'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Modal from '../../../Modal/Modal'
 import './NavBar.scss'
@@ -10,7 +10,7 @@ const NavBar = () => {
   const user = useSelector((state) => state.authReducer.user)
   const dispatch = useDispatch()
   const [showProfileOptions, setShowProfileOptions] = useState(false)
-  const [showProfileModal, setShowProfileModal] = useState(true)
+  const [showProfileModal, setShowProfileModal] = useState()
 
   const [firstName, setFirstName] = useState(user.firstName)
   const [lastName, setLastName] = useState(user.lastName)
@@ -22,14 +22,16 @@ const NavBar = () => {
   const submitForm = (e) => {
     e.preventDefault()
 
-    const form = { firstName, lastName, email, gender, password, avatar }
+    const form = { firstName, lastName, email, gender, avatar }
+    if (password.length > 0) form.password = password
 
     const formData = new FormData()
     for (const key in form) {
       formData.append(key, form[key])
     }
-
-    // dispatch
+    dispatch(updateProfile(formData)).then(() => {
+      setShowProfileModal(false)
+    })
   }
 
   return (
@@ -113,7 +115,9 @@ const NavBar = () => {
               </form>
             </Fragment>
             <Fragment key="footer">
-              <button className="btn-success">UPDATE</button>
+              <button onClick={submitForm} className="btn-success">
+                UPDATE
+              </button>
             </Fragment>
           </Modal>
         )}
