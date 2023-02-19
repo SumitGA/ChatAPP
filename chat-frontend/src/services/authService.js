@@ -8,7 +8,6 @@ const AuthService = {
         return data
       })
       .catch((err) => {
-        console.log('Auth service err', err)
         throw err
       })
   },
@@ -19,7 +18,6 @@ const AuthService = {
         return data
       })
       .catch((err) => {
-        console.log('Auth service err', err)
         throw err
       })
   },

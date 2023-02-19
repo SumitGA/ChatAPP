@@ -1,9 +1,32 @@
 import axios from 'axios'
+import store from '../store'
+import { logout } from '../store/actions/auth'
 
-export default axios.create({
+const API = axios.create({
   baseURL: 'http://127.0.0.1:3001',
   headers: {
     Accept: 'application/json',
     Authorization: `Bearer ${localStorage.getItem('token') || ''}`,
   },
 })
+
+API.interceptors.response.use(
+  (res) => {
+    return res
+  },
+  (err) => {
+    if (err.response.status !== 401) {
+      throw err
+    }
+    debugger
+    if (typeof err.response.data.err.name !== 'undefined') {
+      console.log(err)
+      if (err.response.data.err.name === 'TokenExpiredError') {
+        store.dispatch(logout())
+        throw err
+      }
+    }
+  },
+)
+
+export default API
