@@ -16,7 +16,7 @@ const Messenger = () => {
     <div id="messenger" className="shadow-light">
       {activeChat() ? (
         <div id="messenger-wrap">
-          <ChatHeader />
+          <ChatHeader chat={chat} />
           <br />
           <MessageBox chat={chat} />
           <MessageBox chat={chat} />
