@@ -12,7 +12,7 @@ const Chat = () => {
 
   useEffect(() => {
     dispatch(fetchChats())
-      .then((res) => console.log(res))
+      .then()
       .catch((err) => console.log(err))
   }, [dispatch])
   return (
