@@ -3,8 +3,9 @@ import { useSelector } from 'react-redux'
 import { userStatus } from '../../../../utils/helpers'
 import './Friend.scss'
 
-const Friend = ({ chat }) => {
+const Friend = ({ chat, click }) => {
   const currentChat = useSelector((state) => state.chatReducer.currentChat)
+
   const isChatOpened = () => {
     return currentChat.id === chat.id ? 'opened' : ''
   }
@@ -16,7 +17,7 @@ const Friend = ({ chat }) => {
   }
 
   return (
-    <div className={`friend-list ${isChatOpened}`}>
+    <div onClick={click} className={`friend-list ${isChatOpened}`}>
       <div>
         <img
           width="40"
