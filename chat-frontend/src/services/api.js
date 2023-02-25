@@ -18,7 +18,6 @@ API.interceptors.response.use(
     if (err.response.status !== 401) {
       throw err
     }
-    debugger
     if (typeof err.response.data.err.name !== 'undefined') {
       console.log(err)
       if (err.response.data.err.name === 'TokenExpiredError') {

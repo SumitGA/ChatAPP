@@ -5,10 +5,12 @@ import './Chat.scss'
 import { fetchChats } from '../../store/actions/chat'
 import FriendList from './components/FriendList/FriendList'
 import Messenger from './components/Messenger/Messenger'
+import useSocket from './hooks/SocketConnect'
 
 const Chat = () => {
   const dispatch = useDispatch()
   const user = useSelector((state) => state.authReducer.user)
+  useSocket(user, dispatch)
 
   useEffect(() => {
     dispatch(fetchChats())
