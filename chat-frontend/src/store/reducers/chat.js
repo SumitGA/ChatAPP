@@ -1,3 +1,4 @@
+import { current } from '@reduxjs/toolkit'
 import {
   FETCH_CHATS,
   SET_CURRENT_CHAT,
@@ -43,6 +44,68 @@ const ChatReducer = (state = initialState, action) => {
       return {
         ...state,
         chats: chatsCopy,
+      }
+    }
+
+    case FRIEND_ONLINE: {
+      let currentChatCopy = { ...state.currentChat }
+      const chatsCopy = state.chats.map((chat) => {
+        const Users = chat.Users.map((user) => {
+          if (user.id === parseInt(payload.id)) {
+            return {
+              ...user,
+              status: 'online',
+            }
+          }
+          return user
+        })
+        if (chat.id === currentChatCopy.id) {
+          currentChatCopy = {
+            ...currentChatCopy,
+            Users,
+          }
+        }
+        return {
+          ...chat,
+          Users,
+        }
+      })
+
+      return {
+        ...state,
+        chats: chatsCopy,
+        currentChat: currentChatCopy,
+      }
+    }
+
+    case FRIEND_OFFLINE: {
+      let currentChatCopy = { ...state.currentChat }
+      const chatsCopy = state.chats.map((chat) => {
+        const Users = chat.Users.map((user) => {
+          if (user.id === parseInt(payload.id)) {
+            return {
+              ...user,
+              status: 'online',
+            }
+          }
+          return user
+        })
+        if (chat.id === currentChatCopy.id) {
+          currentChatCopy = {
+            ...currentChatCopy,
+            Users,
+          }
+        }
+        return {
+          ...chat,
+          Users,
+        }
+      })
+
+      return {
+        ...state,
+        chats: chatsCopy,
+        currentChat: currentChatCopy,
       }
     }
 

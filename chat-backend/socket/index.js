@@ -82,7 +82,7 @@ const SocketServer = (server) => {
           // Notify his friends that user is now offline
           for (let i = 0; i < chatters.length; i++) {
             if (users.has(chatters[i])) {
-              user.get(chatters[i]).sockets.forEach((socket) => {
+              users.get(chatters[i]).sockets.forEach((socket) => {
                 try {
                   io.to(socket).emit('offline', user)
                 } catch (err) {

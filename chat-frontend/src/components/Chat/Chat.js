@@ -12,11 +12,11 @@ const Chat = () => {
   const user = useSelector((state) => state.authReducer.user)
   useSocket(user, dispatch)
 
-  useEffect(() => {
-    dispatch(fetchChats())
-      .then()
-      .catch((err) => console.log(err))
-  }, [dispatch])
+  // useEffect(() => {
+  //   dispatch(fetchChats())
+  //     .then()
+  //     .catch((err) => console.log(err))
+  // }, [dispatch])
   return (
     <div id="chat-container">
       <NavBar />
