@@ -13,6 +13,7 @@ const SocketServer = (server) => {
       optionsSuccessStatus: 204,
     },
   })
+
   io.on('connection', (socket) => {
     socket.on('join', async (user) => {
       let sockets = []
@@ -28,8 +29,11 @@ const SocketServer = (server) => {
         sockets.push(socket.id)
         userSockets.set(socket.id, user.id)
       }
+
       const onlineFriends = [] //ids
+
       const chatters = await getChatters(user.id) //query
+
       console.log(chatters)
 
       // Notify his friends that user is now online
@@ -58,15 +62,19 @@ const SocketServer = (server) => {
       console.log('New User joins', user.firstName)
       io.to(socket.id).emit('typing', 'User typing...')
     })
+
     socket.on('disconnect', async () => {
       if (userSockets.has(socket.id)) {
         const user = users.get(userSockets.get(socket.id))
+
         if (user.sockets.length > 1) {
           user.sockets = user.sockets.filter((sock) => {
             if (sock !== socket.id) return true
+
             userSockets.delete(sock)
             return false
           })
+
           users.set(user.id, user)
         } else {
           const chatters = await getChatters(user.id)
@@ -83,6 +91,7 @@ const SocketServer = (server) => {
               })
             }
           }
+
           userSockets.delete(socket.id)
           users.delete(user.id)
         }
@@ -110,6 +119,7 @@ const getChatters = async (userId) => {
     return results.length > 0 ? results.map((el) => el.userId) : []
   } catch (err) {
     console.log(err)
+    return []
   }
 }
 module.exports = SocketServer
