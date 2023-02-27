@@ -5,6 +5,8 @@ import {
   onlineFriends,
   onlineFriend,
   offlineFriend,
+  setSocket,
+  receivedMessage,
 } from '../../../store/actions/chat'
 
 function useSocket(user, dispatch) {
@@ -15,6 +17,7 @@ function useSocket(user, dispatch) {
           transports: ['websocket'],
           upgrade: false,
         })
+        dispatch(setSocket(socket))
         socket.emit('join', user)
         socket.on('typing', (user) => {
           console.log('Event', user)
@@ -33,6 +36,11 @@ function useSocket(user, dispatch) {
         socket.on('offline', (user) => {
           dispatch(offlineFriend(user))
           console.log('Offine', user)
+        })
+
+        socket.on('received', (message) => {
+          dispatch(receivedMessage(message, user.id))
+          console.log('received', message)
         })
         console.log(res)
       })

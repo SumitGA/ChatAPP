@@ -17,9 +17,9 @@ const Messenger = () => {
       {activeChat() ? (
         <div id="messenger-wrap">
           <ChatHeader chat={chat} />
-          <br />
+          <hr />
           <MessageBox chat={chat} />
-          <MessageBox chat={chat} />
+          <MessageInput chat={chat} />
         </div>
       ) : (
         <p>No active chat</p>
